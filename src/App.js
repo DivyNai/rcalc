@@ -1,6 +1,15 @@
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css'
 import { useState } from 'react';
+
+function evaluateExpression(exp) {
+  try {
+    return Function(`"use strict"; return (${exp})`)();
+  } catch {
+    return "Error";
+  }
+}
+
 
 function App() {
   const [value, setValue] = useState('');
@@ -13,7 +22,7 @@ function App() {
           </div>
           <div>
             <input type="button" value="AC" onClick={e => setValue('')}/>
-            <input type="button" value="DE" onClick={e => setValue(value.slice(0, -1))}/>
+            <input type="button" value="DE" onClick={() => setValue(String(value).slice(0, -1))}/>
             <input type="button" value="." onClick={e => setValue(value +  e.target.value)}/>
             <input type="button" value="/" onClick={e => setValue(value + e.target.value)}/>
           </div>
@@ -42,7 +51,8 @@ function App() {
           <div>
             <input type="button" value="00" onClick={e => setValue(value +  e.target.value)}/>
             <input type="button" value="0" onClick={e => setValue(value +  e.target.value)}/>
-            <input type="button" value="=" className='equal' onClick={e => setValue(eval(value))}/>
+            <input type="button" value="=" className='equal' onClick={e => setValue(evaluateExpression(value))}/>
+
           </div>
         </form>
       </div>
