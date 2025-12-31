@@ -1,4 +1,5 @@
 // import logo from './logo.svg';
+import { evaluate } from 'mathjs';
 import './App.css'
 import { useState } from 'react';
 
@@ -13,7 +14,7 @@ import { useState } from 'react';
 function evaluateExpression(exp) {
   try {
     if (!/^[0-9+\-*/.() ]+$/.test(exp)) return "Error";
-    return String(eval(exp));
+    return String(evaluate(exp));
   } catch {
     return "Error";
   }
