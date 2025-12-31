@@ -2,9 +2,18 @@
 import './App.css'
 import { useState } from 'react';
 
+// function evaluateExpression(exp) {
+//   try {
+//     return Function(`"use strict"; return (${exp})`)();
+//   } catch {
+//     return "Error";
+//   }
+// }
+
 function evaluateExpression(exp) {
   try {
-    return Function(`"use strict"; return (${exp})`)();
+    if (!/^[0-9+\-*/.() ]+$/.test(exp)) return "Error";
+    return String(eval(exp));
   } catch {
     return "Error";
   }
